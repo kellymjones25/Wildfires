@@ -21,3 +21,5 @@ Create an app that mimics Degree Works once given the URL to a curriculum and a 
 
 ## Preferences
 
+Coding language: Python
+Testing configuration: unittest
