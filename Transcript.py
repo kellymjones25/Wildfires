@@ -36,3 +36,8 @@ class Transcript:
 
         gpa = total_points / total_classes if total_classes > 0 else 0
         return round(gpa, 2)
+    
+    def display_classes_taken(self):
+        print("Classes Taken:")
+        for course in self.classes:
+            print(f"{course.get('name')} - Grade: {course.get('grade')}")

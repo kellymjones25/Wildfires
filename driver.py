@@ -1,3 +1,5 @@
+import Transcript
+
 def main():
     print("Driver code executed.")
 
