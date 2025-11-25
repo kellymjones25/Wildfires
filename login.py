@@ -55,3 +55,20 @@ class LoginManager:
         if not self._check_password(password, user.password_salt, user.password_hash):
             return None
         return user
+    
+    def get_role(self, username: str) -> Optional[Role]:
+        user = self._users.get(username.strip().lower())
+        return user.role if user else None
+
+    def is_advisor(self, username: str) -> bool:
+        return self.get_role(username) == Role.ADVISOR
+
+    def is_teacher(self, username: str) -> bool:
+        return self.get_role(username) == Role.TEACHER
+
+    def is_student(self, username: str) -> bool:
+        return self.get_role(username) == Role.STUDENT
+
+  
+    def list_users(self) -> Dict[str, Role]:
+        return {u.username: u.role for u in self._users.values()}
