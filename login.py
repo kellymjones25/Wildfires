@@ -39,3 +39,19 @@ class LoginManager:
     def _check_password(self, password: str, salt: bytes, expected_hash: bytes) -> bool:
         test_hash = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, 100_000)
         return hmac.compare_digest(test_hash, expected_hash)
+    
+    def add_user(self, username: str, password: str, role: Role) -> None:
+        username_key = username.strip().lower()
+        if username_key in self._users:
+            raise ValueError(f"User '{username}' already exists.")
+        salt, pwd_hash = self._hash_password(password)
+        self._users[username_key] = User(username=username, password_salt=salt, password_hash=pwd_hash, role=role)
+
+    def authenticate(self, username: str, password: str) -> Optional[User]:
+        username_key = username.strip().lower()
+        user = self._users.get(username_key)
+        if not user:
+            return None
+        if not self._check_password(password, user.password_salt, user.password_hash):
+            return None
+        return user
