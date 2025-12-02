@@ -41,3 +41,17 @@ class Student:
         print(f"GPA: {self.gpa}")
         print(f"Enrolled Classes: {', '.join(self.enrolled_classes)}")
         print(f"Grades: {self.grades}")
+
+    def set_midterm_grade(self, grade):
+        self.midterm = grade
+
+    def set_final_grade(self, grade):
+        self.final = grade
+
+    def get_transcript(self):
+        return (
+            f"Transcript for: {self.name}\n"
+            f"Major: {self.major}\n"
+            f"Midterm Grade: {self.midterm}\n"
+            f"Final Grade: {self.final}\n"
+        )
